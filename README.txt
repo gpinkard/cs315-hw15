@@ -46,4 +46,6 @@ None
  * links and comments below.
  **********************************************************************/
 
-N/A
+http://danni-three.blogspot.com/2013/09/threejs-particle-engine-iii-fire.html
+
+
