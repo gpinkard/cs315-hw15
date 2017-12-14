@@ -170,9 +170,9 @@ function drawFire() {
 			object.scale.x = 20;
 			object.scale.y = 20;
 			object.scale.z = 20;
-			object.position.x = 0;
+			object.position.x = 100;
 			object.position.y = -10;
-			object.position.z = 125;
+			object.position.z = 100;
 			stone4 = object
 			scene.add( stone4 );
 	} );	
@@ -187,13 +187,12 @@ function drawFire() {
 			object.scale.x = 20;
 			object.scale.y = 20;
 			object.scale.z = 20;
-			object.position.x = 120;
+			object.position.x = 55;
 			object.position.y = -10;
-			object.position.z = -100;
+			object.position.z = 120;
 			stone5 = object
 			scene.add( stone5 );
 	} );	
-
 
 		objectLoader.load( 'rock.obj', function ( object ) {
 		object.traverse( function ( child ) {
@@ -204,7 +203,7 @@ function drawFire() {
 			object.scale.x = 20;
 			object.scale.y = 20;
 			object.scale.z = 20;
-			object.position.x = 120;
+			object.position.x = 110;
 			object.position.y = -10;
 			object.position.z = -100;
 			stone6 = object
@@ -221,9 +220,9 @@ function drawFire() {
 			object.scale.x = 20;
 			object.scale.y = 20;
 			object.scale.z = 20;
-			object.position.x = 120;
+			object.position.x = 30;
 			object.position.y = -10;
-			object.position.z = -100;
+			object.position.z = -125;
 			stone7 = object
 			scene.add( stone7 );
 	} );	
@@ -238,9 +237,9 @@ function drawFire() {
 			object.scale.x = 20;
 			object.scale.y = 20;
 			object.scale.z = 20;
-			object.position.x = 120;
+			object.position.x = 70;
 			object.position.y = -10;
-			object.position.z = -100;
+			object.position.z = -120;
 			stone8 = object
 			scene.add( stone8 );
 	} );	
