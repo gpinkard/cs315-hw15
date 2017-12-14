@@ -231,36 +231,38 @@ smokeGroup = new SPE.Group({
 
 smokeEmitter = new SPE.Emitter({
 
-    maxAge: { value: 5 },
+    maxAge: { value: 1 },
     position: { 
-        value: new THREE.Vector3( 0, 230, 0 ),
-        spread: new THREE.Vector3( 100, 100, 100 ),
+        value: new THREE.Vector3( 0, 300, 0 ),
+        spread: new THREE.Vector3( 30, 300, 30),
+				distribution: SPE.distributions.BOX,
+				randomise: false
     },
     size: {
-        //value: [ 2, 8 ],
 				value: 200,
-        spread: [ 0, 1, 2 ]
+				spread: 10
     },
     acceleration: {
         value: new THREE.Vector3( 0, 0, 0 ),
     },
     rotation: {
         axis: new THREE.Vector3( 0, 1, 0 ),
-        spread: new THREE.Vector3( 0, 20, 0 ),
+        spread: new THREE.Vector3( 0, 0, 0 ),
+				//angleSpread: 0.5, // radians
         angle: 100 * Math.PI / 180,
     },
     velocity: {
-        value: new THREE.Vector3( 0, 1, -0.5 ),
-        spread: new THREE.Vector3( 0.25, 0.1, 0.25 )
+        value: new THREE.Vector3( 0, 20, 0.5 ),
+        spread: new THREE.Vector3( 0.25, 0.5, 0.25 )
     },
     opacity: {
         value: [ 0.2, 0.5, 0 ]
     },
     color: {
-        value: [ new THREE.Color( 0x333333 ), new THREE.Color( 0x111111 ) ],
+        value: [ new THREE.Color( 0x625e5e), new THREE.Color( 0x111111 ) ],
         spread: [ new THREE.Vector3( 0.2, 0.1, 0.1 ), new THREE.Vector3( 0, 0, 0 ) ]
     },
-    particleCount: 600,
+    particleCount: 50,
 });
 smokeGroup.addEmitter(smokeEmitter);
 group.addEmitter( emitter );
