@@ -105,7 +105,9 @@ function drawFire() {
 
 	//objects
 	var log1, log2, log3, burningLog1, burningLog2, burningLog3, burningLog4, burningLogSmall1;
-	var stone1, stone2, stone3, ston4, stone5, stone6, stone7, stone8;	
+	var stone1, stone2, stone3, stone4, stone5, stone6, stone7, stone8;	
+	var stones = [stone2, stone3, stone4, stone5, stone6, stone7, stone8];
+
 	var manager = new THREE.LoadingManager();
 		manager.onProgress = function ( item, loaded, total ) {
 			console.log( item, loaded, total );
@@ -114,19 +116,133 @@ function drawFire() {
 		objectLoader.load( 'rock.obj', function ( object ) {
 		object.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh ) {
-				child.material.map = burningTexture;
+				child.material.map = woodTexture;
 			}
 		} );
-			object.rotation.x = 20* Math.PI / 180;
-			object.rotation.z = 20* Math.PI / 180;
-			object.scale.x = 25;
-			object.scale.y = 25;
-			object.scale.z = 25;
-			object.position.x = 80;
-			object.position.y = 10;
-			object.position.z = 40;
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = 125;
+			object.position.y = -10;
+			object.position.z = 50;
 			stone1 = object
 			scene.add( stone1 );
+	} );	
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = woodTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = 125;
+			object.position.y = -10;
+			object.position.z = -50;
+			stone2 = object
+			scene.add( stone2 );
+	} );	
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = woodTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = 140;
+			object.position.y = -10;
+			object.position.z = 0;
+			stone3 = object
+			scene.add( stone3 );
+	} );	
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = woodTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = 0;
+			object.position.y = -10;
+			object.position.z = 125;
+			stone4 = object
+			scene.add( stone4 );
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = woodTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = 120;
+			object.position.y = -10;
+			object.position.z = -100;
+			stone5 = object
+			scene.add( stone5 );
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = woodTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = 120;
+			object.position.y = -10;
+			object.position.z = -100;
+			stone6 = object
+			scene.add( stone6 );
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = woodTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = 120;
+			object.position.y = -10;
+			object.position.z = -100;
+			stone7 = object
+			scene.add( stone7 );
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = woodTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = 120;
+			object.position.y = -10;
+			object.position.z = -100;
+			stone8 = object
+			scene.add( stone8 );
 	} );	
 
 	log1 = new THREE.Mesh(
