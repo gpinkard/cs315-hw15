@@ -15,15 +15,15 @@ function fillScene() {
 
 	scene.add( new THREE.AmbientLight( 0x222222 ) );
 
-	var light = new THREE.DirectionalLight( 0xffffff, 0.7 );
-	light.position.set( 200, 500, 500 );
+	//var light = new THREE.DirectionalLight( 0xffffff, 0.7 );
+	//light.position.set( 200, 500, 500 );
 
-	scene.add( light );
+	//scene.add( light );
 
-	light = new THREE.DirectionalLight( 0xffffff, 0.9 );
-	light.position.set( -200, -100, -400 );
+	//light = new THREE.DirectionalLight( 0xffffff, 0.9 );
+	//light.position.set( -200, -100, -400 );
 
-	scene.add( light );
+	//scene.add( light );
 
 //grid xz
  var gridXZ = new THREE.GridHelper(2000, 100, new THREE.Color(0xCCCCCC), new THREE.Color(0x888888));
@@ -90,7 +90,7 @@ emitter = new SPE.Emitter( {
     spread: 0
   },
   position: {
-    value: new THREE.Vector3( 0, 30, 0 ),
+    value: new THREE.Vector3( 0, 130, 0 ),
     spread: new THREE.Vector3( 10, 0, 0 ),
     spreadClamp: new THREE.Vector3( 0, 0, 0 ),
     distribution: SPE.distributions.BOX,
@@ -131,7 +131,7 @@ emitter = new SPE.Emitter( {
     center: new THREE.Vector3( 0, 0, 0 )
   },
   size: {
-    value: 20,
+    value: 300,
     spread: 0
   },
   opacity: {
