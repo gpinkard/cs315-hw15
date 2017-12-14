@@ -37,14 +37,24 @@ function fillScene() {
 	});
 
   params = {
-		size: 400,
+		flameSize: 400,
+		smokeHeight: 300,
+		smokeDensity: 200 
 		//bend: 0,
 		//grab: 0
   };
   
-	gui.add(params, 'size').min(150).max(600).step(10).name('size').listen().onChange(function (value){	
+	gui.add(params, 'flameSize').min(150).max(600).step(10).name('flameSize').listen().onChange(function (value){	
     emitter.size.value[ 0 ] = value;
     emitter.size.value = emitter.size.value;
+	});
+	gui.add(params, 'smokeHeight').min(200).max(600).step(10).name('smokeHeight').listen().onChange(function (value){	
+    smokeEmitter.position.spread.setY(value);
+    smokeEmitter.position.spread = smokeEmitter.position.spread;
+	});
+	gui.add(params, 'smokeDensity').min(0).max(400).step(10).name('smokeDensity').listen().onChange(function (value){	
+    smokeEmitter.size.value = value;
+    smokeEmitter.size.value = smokeEmitter.size.value;
 	});
 	//gui.add(params, 'bend').min(-90).max(90).step(10).name('bend');
 	//gui.add(params, 'grab').min(0).max(30).step(1).name('grab');
@@ -167,7 +177,7 @@ emitter = new SPE.Emitter( {
   },
   position: {
     value: new THREE.Vector3( 0, 180, 0 ),
-    spread: new THREE.Vector3( 10, 0, 0 ),
+    spread: new THREE.Vector3(0, 200, 0 ),
     spreadClamp: new THREE.Vector3( 0, 0, 0 ),
     distribution: SPE.distributions.BOX,
     randomise: false
@@ -219,12 +229,9 @@ emitter = new SPE.Emitter( {
   }
 });
 
-var loader = new THREE.TextureLoader();
-var url = './img/cloudSml.png';
-var texture = loader.load( url );
 smokeGroup = new SPE.Group({
 	texture: {
-    value: texture
+    value: THREE.ImageUtils.loadTexture( './img/cloudSml.png' ),
   },
   blending: THREE.NormalBlending
 });
@@ -248,7 +255,6 @@ smokeEmitter = new SPE.Emitter({
     rotation: {
         axis: new THREE.Vector3( 0, 1, 0 ),
         spread: new THREE.Vector3( 0, 0, 0 ),
-				//angleSpread: 0.5, // radians
         angle: 100 * Math.PI / 180,
     },
     velocity: {
@@ -264,6 +270,7 @@ smokeEmitter = new SPE.Emitter({
     },
     particleCount: 50,
 });
+
 smokeGroup.addEmitter(smokeEmitter);
 group.addEmitter( emitter );
 group.addEmitter(smokeEmitter);
