@@ -46,6 +46,8 @@ None
  * links and comments below.
  **********************************************************************/
 
-http://danni-three.blogspot.com/2013/09/threejs-particle-engine-iii-fire.html
+https://github.com/squarefeet/ShaderParticleEngine
+
+http://squarefeet.github.io/ShaderParticleEngine/examples/runtimeChanging.html
 
 

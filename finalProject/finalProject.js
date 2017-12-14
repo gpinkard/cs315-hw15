@@ -31,23 +31,26 @@ function fillScene() {
 
 // gui
 	
-	//gui = new dat.GUI({
-	//	autoPlace: false,
-  //  height : (32 * 3)- 1
-	//});
+	gui = new dat.GUI({
+		autoPlace: false,
+    height : (32 * 3)- 1
+	});
 
-  //params = {
-	//	swivel: 0,
-	//	bend: 0,
-	//	grab: 0
-  //};
+  params = {
+		size: 300,
+		//bend: 0,
+		//grab: 0
+  };
   
-	//gui.add(params, 'swivel').min(-90).max(90).step(10).name('swivel');
+	gui.add(params, 'size').min(150).max(400).step(10).name('size').listen().onChange(function (value){	
+    emitter.size.value[ 0 ] = value;
+    emitter.size.value = emitter.size.value;
+	});
 	//gui.add(params, 'bend').min(-90).max(90).step(10).name('bend');
 	//gui.add(params, 'grab').min(0).max(30).step(1).name('grab');
-	//gui.domElement.style.position = "relative";
-	//gui.domElement.style.top = "-400px";
-	//gui.domElement.style.left = "350px";
+	gui.domElement.style.position = "relative";
+	gui.domElement.style.top = "-400px";
+	gui.domElement.style.left = "350px";
 
 
  //axes
@@ -69,7 +72,55 @@ function fillScene() {
 }
 
 function drawFire() {	
+	// materials
+	var woodMaterial = new THREE.MeshPhongMaterial();
+	woodMaterial.color.setHex(0x4f3100);	
+	var burningWoodMaterial = new THREE.MeshPhongMaterial();
+	burningWoodMaterial.color.setRGB( 0, 0, 1 );	
+	var stoneMaterial = new THREE.MeshPhongMaterial();
+	stoneMaterial.color.setRGB( 0.0, 0.1, 0.4 );	
+
+	//objects
+	var log1, log2, log3, burningLog1, burningLog2, burningLog3, stone;
 	
+	log1 = new THREE.Mesh(
+		new THREE.CylinderGeometry(25, 25, 120, 8, 15, false), woodMaterial);
+	log1.position.x = 200;
+	log1.position.y = 20;
+	log1.position.z = 200;
+	log1.rotation.x = Math.PI/2;
+	log1.rotation.z = Math.PI/2;
+	scene.add(log1);
+	
+	burningLog1 = new THREE.Mesh(
+		new THREE.CylinderGeometry(25, 25, 250, 8, 15, false), burningWoodMaterial);
+	burningLog1.position.x = 40;
+	burningLog1.position.y = 70;
+	burningLog1.position.z = 0;
+	//burningLog1.rotation.x = Math.PI/3;
+	//burningLog1.rotation.z = Math.PI/2;
+	//burningLog1.rotation.y = Math.PI/2;
+	scene.add(burningLog1);
+
+	burningLog2= new THREE.Mesh(
+		new THREE.CylinderGeometry(25, 25, 250, 8, 15, false), burningWoodMaterial);
+	burningLog2.position.x = 25;
+	burningLog2.position.y = 70;
+	burningLog2.position.z = 40;
+	//burningLog1.rotation.x = Math.PI/3;
+	//burningLog1.rotation.z = Math.PI/2;
+	//burningLog1.rotation.y = Math.PI/2;
+	scene.add(burningLog2);
+
+	burningLog3 = new THREE.Mesh(
+		new THREE.CylinderGeometry(25, 25, 250, 8, 15, false), burningWoodMaterial);
+	burningLog3.position.x = -30;
+	burningLog3.position.y = 70;
+	burningLog3.position.z = -30;
+	//burningLog1.rotation.x = Math.PI/3;
+	//burningLog1.rotation.z = Math.PI/2;
+	//burningLog1.rotation.y = Math.PI/2;
+	scene.add(burningLog3);
 	group = new SPE.Group( {
                     // Possible API for animated textures...
 	texture: {
@@ -149,6 +200,8 @@ camera.position.z = 50;
 camera.position.y = 0;
 camera.lookAt( scene.position );
 
+
+	
 //renderer.setClearColor( 0x222222, 0.1 );
 //renderer.setSize( window.innerWidth, window.innerHeight );
 //document.body.appendChild( renderer.domElement );
@@ -163,8 +216,7 @@ function init() {
   stats = new Stats(),
 
 	// RENDERER
-	renderer = new THREE.WebGLRenderer( { antialias: true } );
-
+	renderer = new THREE.WebGLRenderer( { antialias: true } );	
 	renderer.gammaInput = true;
 	renderer.gammaOutput = true;
 	renderer.setSize(canvasWidth, canvasHeight);
@@ -183,7 +235,7 @@ function init() {
 function addToDOM() {
     var canvas = document.getElementById('canvas');
     canvas.appendChild(renderer.domElement);
-    //canvas.appendChild(gui.domElement);
+    canvas.appendChild(gui.domElement);
 }
 
 function animate() {
