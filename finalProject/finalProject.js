@@ -15,15 +15,15 @@ function fillScene() {
 
 	scene.add( new THREE.AmbientLight( 0x222222 ) );
 
-	//var light = new THREE.DirectionalLight( 0xffffff, 0.7 );
-	//light.position.set( 200, 500, 500 );
+	var light = new THREE.DirectionalLight( 0xffffff, 0.7 );
+	light.position.set( 200, 500, 500 );
 
-	//scene.add( light );
+	scene.add( light );
 
-	//light = new THREE.DirectionalLight( 0xffffff, 0.9 );
-	//light.position.set( -200, -100, -400 );
+	light = new THREE.DirectionalLight( 0xffffff, 0.9 );
+	light.position.set( -200, -100, -400 );
 
-	//scene.add( light );
+	scene.add( light );
 
 //grid xz
  var gridXZ = new THREE.GridHelper(2000, 100, new THREE.Color(0xCCCCCC), new THREE.Color(0x888888));
@@ -37,12 +37,12 @@ function fillScene() {
 	});
 
   params = {
-		size: 300,
+		size: 400,
 		//bend: 0,
 		//grab: 0
   };
   
-	gui.add(params, 'size').min(150).max(400).step(10).name('size').listen().onChange(function (value){	
+	gui.add(params, 'size').min(150).max(600).step(10).name('size').listen().onChange(function (value){	
     emitter.size.value[ 0 ] = value;
     emitter.size.value = emitter.size.value;
 	});
@@ -74,21 +74,25 @@ function fillScene() {
 function drawFire() {	
 	// materials
 	var loader = new THREE.TextureLoader();
-	var texture = loader.load( './img/burningWoodTexture.png', render );
-	texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-	texture.matrixAutoUpdate = false; // set this to false to update texture.matrix manually
-	var burningWoodMaterial = new THREE.MeshBasicMaterial( { map : texture } );	
-
-	var woodMaterial = new THREE.MeshPhongMaterial();
-	woodMaterial.color.setHex(0x4f3100);	
-	var stoneMaterial = new THREE.MeshPhongMaterial();
-	stoneMaterial.color.setRGB( 0.0, 0.1, 0.4 );	
+	// burning texture
+	var burningTexture = loader.load( './img/burningWoodTexture.png', render );
+	burningTexture.wrapS = burningTexture.wrapT = THREE.RepeatWrapping;
+	burningTexture.matrixAutoUpdate = false; // set this to false to update texture.matrix manually
+	var burningWoodMaterial = new THREE.MeshBasicMaterial( { map : burningTexture} );	
+	
+	var woodTexture = loader.load('./img/woodTexture.png', render );
+	woodTexture.wrapS = woodTexture.wrapT = THREE.RepeatWrapping;
+	woodTexture.matrixAutoUpdate = false; // set this to false to update texture.matrix manually
+	var woodMaterial = new THREE.MeshPhongMaterial({map : woodTexture});
+	
+	//var stoneMaterial = new THREE.MeshPhongMaterial();
+	//stoneMaterial.color.setRGB( 0.0, 0.1, 0.4 );	
 
 	//objects
-	var log1, log2, log3, burningLog1, burningLog2, burningLog3, burningLog4, stone;
+	var log1, log2, log3, burningLog1, burningLog2, burningLog3, burningLog4, burningLogSmall1, stone;
 	
 	log1 = new THREE.Mesh(
-		new THREE.CylinderGeometry(25, 25, 120, 8, 15, false), burningWoodMaterial);
+		new THREE.CylinderGeometry(25, 25, 160, 8, 15, false), woodMaterial);
 	log1.position.x = 200;
 	log1.position.y = 20;
 	log1.position.z = 200;
@@ -117,7 +121,7 @@ function drawFire() {
 	scene.add(burningLog2);
 
 	burningLog3 = new THREE.Mesh(
-		new THREE.CylinderGeometry(25, 25, 250, 8, 15, false), woodMaterial);
+		new THREE.CylinderGeometry(25, 25, 250, 8, 15, false), burningWoodMaterial);
 	burningLog3.position.x = -40;
 	burningLog3.position.y = 100;
 	burningLog3.position.z = 40;
@@ -134,6 +138,14 @@ function drawFire() {
 	burningLog4.rotation.y = -13.5;
 	scene.add(burningLog4);
 
+	burningLogSmall1 = new THREE.Mesh(
+		new THREE.CylinderGeometry(35, 35, 100, 8, 10, false), burningWoodMaterial);
+	burningLogSmall1.position.x = 0;
+	burningLogSmall1.position.y = 20;
+	burningLogSmall1.position.z = 0;
+	burningLogSmall1.rotation.x = Math.PI/2;
+	burningLogSmall1.rotation.z = Math.PI/2;
+	scene.add(burningLogSmall1);
 	group = new SPE.Group( {
                     // Possible API for animated textures...
 	texture: {
@@ -154,7 +166,7 @@ emitter = new SPE.Emitter( {
     spread: 0
   },
   position: {
-    value: new THREE.Vector3( 0, 130, 0 ),
+    value: new THREE.Vector3( 0, 180, 0 ),
     spread: new THREE.Vector3( 10, 0, 0 ),
     spreadClamp: new THREE.Vector3( 0, 0, 0 ),
     distribution: SPE.distributions.BOX,
@@ -207,10 +219,56 @@ emitter = new SPE.Emitter( {
   }
 });
 
+var loader = new THREE.TextureLoader();
+var url = './img/cloudSml.png';
+var texture = loader.load( url );
+smokeGroup = new SPE.Group({
+	texture: {
+    value: texture
+  },
+  blending: THREE.NormalBlending
+});
+
+smokeEmitter = new SPE.Emitter({
+
+    maxAge: { value: 5 },
+    position: { 
+        value: new THREE.Vector3( 0, 230, 0 ),
+        spread: new THREE.Vector3( 100, 100, 100 ),
+    },
+    size: {
+        //value: [ 2, 8 ],
+				value: 200,
+        spread: [ 0, 1, 2 ]
+    },
+    acceleration: {
+        value: new THREE.Vector3( 0, 0, 0 ),
+    },
+    rotation: {
+        axis: new THREE.Vector3( 0, 1, 0 ),
+        spread: new THREE.Vector3( 0, 20, 0 ),
+        angle: 100 * Math.PI / 180,
+    },
+    velocity: {
+        value: new THREE.Vector3( 0, 1, -0.5 ),
+        spread: new THREE.Vector3( 0.25, 0.1, 0.25 )
+    },
+    opacity: {
+        value: [ 0.2, 0.5, 0 ]
+    },
+    color: {
+        value: [ new THREE.Color( 0x333333 ), new THREE.Color( 0x111111 ) ],
+        spread: [ new THREE.Vector3( 0.2, 0.1, 0.1 ), new THREE.Vector3( 0, 0, 0 ) ]
+    },
+    particleCount: 600,
+});
+smokeGroup.addEmitter(smokeEmitter);
 group.addEmitter( emitter );
+group.addEmitter(smokeEmitter);
 scene.add( group.mesh );
-camera.position.z = 50;
-camera.position.y = 0;
+scene.add(smokeGroup.mesh);
+camera.position.z = 350;
+camera.position.y = 400;
 camera.lookAt( scene.position );
 
 
@@ -237,7 +295,6 @@ function init() {
 
 	// CAMERA
 	camera = new THREE.PerspectiveCamera( 45, canvasRatio, 1, 4000 );
-	console.log("super new camera");
   //camera = new THREE.PerspectiveCamera( 64, window.innerWidth / window.innerHeight, 0.1, 10000 ),
 	// CONTROLS
 	cameraControls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -258,6 +315,7 @@ function animate() {
 
 function render() {
 	var delta = clock.getDelta();
+	smokeGroup.tick(delta);
 	group.tick(delta);
 	cameraControls.update(delta);
 	renderer.render(scene, camera);
