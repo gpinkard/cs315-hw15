@@ -70,18 +70,12 @@ function fillScene() {
 	scene.background = new THREE.CubeTextureLoader()
 		.setPath( '' )
 		.load( [
-			//'sky-xneg.png',
-			//'sky-xpos.png',
-			//'sky-yneg.png',
-			//'sky-ypos.png',
-			//'sky-zneg.png',
-			//'sky-zpos.png'
-			//'1.png',
-			//'2.png',
-			//'3.png',
-			//'4.png',
-			//'5.png',
-			//'6.png'
+			'0003.png',
+			'0004.png',
+			'0006.png',
+			'0005.png',
+			'0002.png',
+			'0001.png'
 		] );
  drawFire();
 }
@@ -101,12 +95,16 @@ function drawFire() {
 	var woodMaterial = new THREE.MeshPhongMaterial({map : woodTexture});
 	
 	//var stoneMaterial = new THREE.MeshPhongMaterial();
+	var stoneTexture = loader.load('./img/stoneTexture.jpg', render );
+	stoneTexture.wrapS = stoneTexture.wrapT = THREE.RepeatWrapping;
+	stoneTexture.matrixAutoUpdate = false; // set this to false to update texture.matrix manually
+	var stoneMaterial= new THREE.MeshPhongMaterial({map : stoneTexture});
 	//stoneMaterial.color.setRGB( 0.0, 0.1, 0.4 );	
 
 	//objects
 	var log1, log2, log3, burningLog1, burningLog2, burningLog3, burningLog4, burningLogSmall1;
-	var stone1, stone2, stone3, stone4, stone5, stone6, stone7, stone8;	
-	var stones = [stone2, stone3, stone4, stone5, stone6, stone7, stone8];
+	var stone1, stone2, stone3, stone4, stone5, stone6, stone7, stone8, stone9, stone10, stone11;	
+	var stone12, stone13, stone14, stone15, stone16, stone17, stone18;
 
 	var manager = new THREE.LoadingManager();
 		manager.onProgress = function ( item, loaded, total ) {
@@ -116,7 +114,7 @@ function drawFire() {
 		objectLoader.load( 'rock.obj', function ( object ) {
 		object.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh ) {
-				child.material.map = woodTexture;
+				child.material.map = stoneTexture;
 			}
 		} );
 			object.scale.x = 20;
@@ -132,7 +130,7 @@ function drawFire() {
 		objectLoader.load( 'rock.obj', function ( object ) {
 		object.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh ) {
-				child.material.map = woodTexture;
+				child.material.map = stoneTexture;
 			}
 		} );
 			object.scale.x = 20;
@@ -148,7 +146,7 @@ function drawFire() {
 		objectLoader.load( 'rock.obj', function ( object ) {
 		object.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh ) {
-				child.material.map = woodTexture;
+				child.material.map = stoneTexture;
 			}
 		} );
 			object.scale.x = 20;
@@ -164,7 +162,7 @@ function drawFire() {
 		objectLoader.load( 'rock.obj', function ( object ) {
 		object.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh ) {
-				child.material.map = woodTexture;
+				child.material.map = stoneTexture;
 			}
 		} );
 			object.scale.x = 20;
@@ -181,7 +179,7 @@ function drawFire() {
 		objectLoader.load( 'rock.obj', function ( object ) {
 		object.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh ) {
-				child.material.map = woodTexture;
+				child.material.map = stoneTexture;
 			}
 		} );
 			object.scale.x = 20;
@@ -197,7 +195,7 @@ function drawFire() {
 		objectLoader.load( 'rock.obj', function ( object ) {
 		object.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh ) {
-				child.material.map = woodTexture;
+				child.material.map = stoneTexture;
 			}
 		} );
 			object.scale.x = 20;
@@ -214,7 +212,7 @@ function drawFire() {
 		objectLoader.load( 'rock.obj', function ( object ) {
 		object.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh ) {
-				child.material.map = woodTexture;
+				child.material.map = stoneTexture;
 			}
 		} );
 			object.scale.x = 20;
@@ -231,7 +229,143 @@ function drawFire() {
 		objectLoader.load( 'rock.obj', function ( object ) {
 		object.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh ) {
-				child.material.map = woodTexture;
+				child.material.map = stoneTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = -85;
+			object.position.y = -10;
+			object.position.z = 100;
+			stone9 = object
+			scene.add( stone9 );
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = stoneTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = -100;
+			object.position.y = -10;
+			object.position.z = 55;
+			stone10 = object
+			scene.add( stone10 );
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = stoneTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = -10;
+			object.position.y = -10;
+			object.position.z = -120;
+			stone11 = object
+			scene.add( stone11 );
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = stoneTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = -60;
+			object.position.y = -10;
+			object.position.z = -120;
+			stone12 = object
+			scene.add( stone12 );
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = stoneTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = -100;
+			object.position.y = -10;
+			object.position.z = -80;
+			stone13 = object
+			scene.add( stone13 );
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = stoneTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = -110;
+			object.position.y = -10;
+			object.position.z = -30;
+			stone14 = object
+			scene.add( stone14);
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = stoneTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = -40;
+			object.position.y = -10;
+			object.position.z = 120;
+			stone15 = object
+			scene.add( stone15 );
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = stoneTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = 5;
+			object.position.y = -10;
+			object.position.z = 130;
+			stone16 = object
+			scene.add( stone16 );
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = stoneTexture;
 			}
 		} );
 			object.scale.x = 20;
@@ -240,8 +374,25 @@ function drawFire() {
 			object.position.x = 70;
 			object.position.y = -10;
 			object.position.z = -120;
-			stone8 = object
-			scene.add( stone8 );
+			stone17 = object
+			scene.add( stone17 );
+	} );	
+
+
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = stoneTexture;
+			}
+		} );
+			object.scale.x = 20;
+			object.scale.y = 20;
+			object.scale.z = 20;
+			object.position.x = -110;
+			object.position.y = -10;
+			object.position.z = 5;
+			stone18 = object
+			scene.add( stone18 );
 	} );	
 
 	log1 = new THREE.Mesh(
@@ -416,7 +567,6 @@ smokeEmitter = new SPE.Emitter({
 
 smokeGroup.addEmitter(smokeEmitter);
 group.addEmitter( emitter );
-group.addEmitter(smokeEmitter);
 scene.add( group.mesh );
 scene.add(smokeGroup.mesh);
 camera.position.z = 350;
