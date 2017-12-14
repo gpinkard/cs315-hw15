@@ -73,18 +73,22 @@ function fillScene() {
 
 function drawFire() {	
 	// materials
+	var loader = new THREE.TextureLoader();
+	var texture = loader.load( './img/burningWoodTexture.png', render );
+	texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+	texture.matrixAutoUpdate = false; // set this to false to update texture.matrix manually
+	var burningWoodMaterial = new THREE.MeshBasicMaterial( { map : texture } );	
+
 	var woodMaterial = new THREE.MeshPhongMaterial();
 	woodMaterial.color.setHex(0x4f3100);	
-	var burningWoodMaterial = new THREE.MeshPhongMaterial();
-	burningWoodMaterial.color.setRGB( 0, 0, 1 );	
 	var stoneMaterial = new THREE.MeshPhongMaterial();
 	stoneMaterial.color.setRGB( 0.0, 0.1, 0.4 );	
 
 	//objects
-	var log1, log2, log3, burningLog1, burningLog2, burningLog3, stone;
+	var log1, log2, log3, burningLog1, burningLog2, burningLog3, burningLog4, stone;
 	
 	log1 = new THREE.Mesh(
-		new THREE.CylinderGeometry(25, 25, 120, 8, 15, false), woodMaterial);
+		new THREE.CylinderGeometry(25, 25, 120, 8, 15, false), burningWoodMaterial);
 	log1.position.x = 200;
 	log1.position.y = 20;
 	log1.position.z = 200;
@@ -95,32 +99,41 @@ function drawFire() {
 	burningLog1 = new THREE.Mesh(
 		new THREE.CylinderGeometry(25, 25, 250, 8, 15, false), burningWoodMaterial);
 	burningLog1.position.x = 40;
-	burningLog1.position.y = 70;
-	burningLog1.position.z = 0;
-	//burningLog1.rotation.x = Math.PI/3;
-	//burningLog1.rotation.z = Math.PI/2;
-	//burningLog1.rotation.y = Math.PI/2;
+	burningLog1.position.y = 100;
+	burningLog1.position.z = 40;
+	burningLog1.rotation.z = 16;
+	burningLog1.rotation.y = -13.5;
+	//burningLog1.rotation.x = 15.5;
 	scene.add(burningLog1);
 
 	burningLog2= new THREE.Mesh(
 		new THREE.CylinderGeometry(25, 25, 250, 8, 15, false), burningWoodMaterial);
-	burningLog2.position.x = 25;
-	burningLog2.position.y = 70;
-	burningLog2.position.z = 40;
-	//burningLog1.rotation.x = Math.PI/3;
-	//burningLog1.rotation.z = Math.PI/2;
-	//burningLog1.rotation.y = Math.PI/2;
+	burningLog2.position.x = 40;
+	burningLog2.position.y = 100;
+	burningLog2.position.z = -40;
+	burningLog2.rotation.z = 16;
+	burningLog2.rotation.y = 13.5;
+	//burningLog2.rotation.x = -15.5;
 	scene.add(burningLog2);
 
 	burningLog3 = new THREE.Mesh(
-		new THREE.CylinderGeometry(25, 25, 250, 8, 15, false), burningWoodMaterial);
-	burningLog3.position.x = -30;
-	burningLog3.position.y = 70;
-	burningLog3.position.z = -30;
-	//burningLog1.rotation.x = Math.PI/3;
-	//burningLog1.rotation.z = Math.PI/2;
-	//burningLog1.rotation.y = Math.PI/2;
+		new THREE.CylinderGeometry(25, 25, 250, 8, 15, false), woodMaterial);
+	burningLog3.position.x = -40;
+	burningLog3.position.y = 100;
+	burningLog3.position.z = 40;
+	burningLog3.rotation.z = -16;
+	burningLog3.rotation.y = 13.5;
 	scene.add(burningLog3);
+
+	burningLog4 = new THREE.Mesh(
+		new THREE.CylinderGeometry(25, 25, 250, 8, 15, false), burningWoodMaterial);
+	burningLog4.position.x = -40;
+	burningLog4.position.y = 100;
+	burningLog4.position.z = -40;
+	burningLog4.rotation.z = -16;
+	burningLog4.rotation.y = -13.5;
+	scene.add(burningLog4);
+
 	group = new SPE.Group( {
                     // Possible API for animated textures...
 	texture: {
