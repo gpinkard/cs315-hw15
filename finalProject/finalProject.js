@@ -67,16 +67,21 @@ function fillScene() {
  var axes = new THREE.AxisHelper(150);
  axes.position.y = 1;
  scene.add(axes);
-
 	scene.background = new THREE.CubeTextureLoader()
 		.setPath( '' )
 		.load( [
-			'sky-xneg.png',
-			'sky-xpos.png',
-			'sky-yneg.png',
-			'sky-ypos.png',
-			'sky-zneg.png',
-			'sky-zpos.png'
+			//'sky-xneg.png',
+			//'sky-xpos.png',
+			//'sky-yneg.png',
+			//'sky-ypos.png',
+			//'sky-zneg.png',
+			//'sky-zpos.png'
+			//'1.png',
+			//'2.png',
+			//'3.png',
+			//'4.png',
+			//'5.png',
+			//'6.png'
 		] );
  drawFire();
 }
@@ -99,8 +104,31 @@ function drawFire() {
 	//stoneMaterial.color.setRGB( 0.0, 0.1, 0.4 );	
 
 	//objects
-	var log1, log2, log3, burningLog1, burningLog2, burningLog3, burningLog4, burningLogSmall1, stone;
-	
+	var log1, log2, log3, burningLog1, burningLog2, burningLog3, burningLog4, burningLogSmall1;
+	var stone1, stone2, stone3, ston4, stone5, stone6, stone7, stone8;	
+	var manager = new THREE.LoadingManager();
+		manager.onProgress = function ( item, loaded, total ) {
+			console.log( item, loaded, total );
+		};
+		var objectLoader = new THREE.OBJLoader( manager );
+		objectLoader.load( 'rock.obj', function ( object ) {
+		object.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = burningTexture;
+			}
+		} );
+			object.rotation.x = 20* Math.PI / 180;
+			object.rotation.z = 20* Math.PI / 180;
+			object.scale.x = 25;
+			object.scale.y = 25;
+			object.scale.z = 25;
+			object.position.x = 80;
+			object.position.y = 10;
+			object.position.z = 40;
+			stone1 = object
+			scene.add( stone1 );
+	} );	
+
 	log1 = new THREE.Mesh(
 		new THREE.CylinderGeometry(25, 25, 160, 8, 15, false), woodMaterial);
 	log1.position.x = 200;
@@ -324,8 +352,8 @@ function animate() {
 
 function render() {
 	var delta = clock.getDelta();
-	smokeGroup.tick(delta);
 	group.tick(delta);
+	smokeGroup.tick(delta);
 	cameraControls.update(delta);
 	renderer.render(scene, camera);
 }
