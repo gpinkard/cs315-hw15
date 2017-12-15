@@ -40,7 +40,7 @@ function fillScene() {
 		//grab: 0
   };
   
-	gui.add(params, 'flameSize').min(150).max(600).step(10).name('flameSize').listen().onChange(function (value){	
+	gui.add(params, 'flameSize').min(0).max(600).step(10).name('flameSize').listen().onChange(function (value){	
     emitter.size.value[ 0 ] = value;
     emitter.size.value = emitter.size.value;
 	});
@@ -97,7 +97,7 @@ function drawFire() {
 	var stoneMaterial= new THREE.MeshPhongMaterial({map : stoneTexture});
 	//stoneMaterial.color.setRGB( 0.0, 0.1, 0.4 );	
 	
-	var firePitTexture = loader.load('./img/firePitTexture.png', render);
+	var firePitTexture = loader.load('./img/firePitTexture.jpg', render);
 	firePitTexture.wrapS = firePitTexture.wrapT = THREE.RepeatWrapping;
 	firePitTexture.matrixAutoAupdate = false;
 	var firePitMaterial = new THREE.MeshPhongMaterial({map : firePitTexture, side: THREE.DoubleSide});
@@ -402,6 +402,22 @@ function drawFire() {
 			scene.add( stone18 );
 	} );	
 
+	objectLoader.load('teapot.obj', function (object) {
+		object.traverse(function (child) {
+			if(child instanceof THREE.Mesh ){
+			child.material.map = stoneTexture;
+			};
+		});
+		object.scale.x = 0.8;
+		object.scale.y = 0.8;
+		object.scale.z = 0.8;
+		object.position.x = 0;
+		object.position.y = 300;
+		object.position.x = 0;
+		var teapot = object;
+		scene.add(teapot);
+	});
+
 	firePit = new THREE.Mesh(
 		new THREE.PlaneGeometry(220, 220, 10 ), burningWoodMaterial);
 	firePit.position.x = 4;
@@ -447,28 +463,28 @@ function drawFire() {
 	log3.rotation.x = Math.PI/2;
 	scene.add(log3);
 
-	//pole1 = new THREE.Mesh(
-	//	new THREE.CylinderGeometry(10,10,340,10,15,false), woodMaterial);
-	//pole1.position.x = 140;
-	//pole1.position.y = 170;
-	//pole1.position.z = 70;
-	//scene.add(pole1);
+	pole1 = new THREE.Mesh(
+		new THREE.CylinderGeometry(10,10,440,10,15,false), woodMaterial);
+	pole1.position.x = 140;
+	pole1.position.y = 170;
+	pole1.position.z = 70;
+	scene.add(pole1);
 
-	//pole2 = new THREE.Mesh(
-	//	new THREE.CylinderGeometry(10,10,340,10,15,false), woodMaterial);
-	//pole2.position.x = -140;
-	//pole2.position.y = 170;
-	//pole2.position.z = -70;
-	//scene.add(pole2);
+	pole2 = new THREE.Mesh(
+		new THREE.CylinderGeometry(10,10,440,10,15,false), woodMaterial);
+	pole2.position.x = -140;
+	pole2.position.y = 170;
+	pole2.position.z = -70;
+	scene.add(pole2);
 
-	//pole3 = new THREE.Mesh(
-	//	new THREE.CylinderGeometry(6, 6,250,10,15,false), woodMaterial);
-	//pole3.position.x = 200;
-	//pole3.position.y = 320;
-	//pole3.position.z = 100;
-	//pole3.rotation.x = Math.PI/2;
-	//pole3.rotation.z = Math.PI/2;
-	//scene.add(pole3);
+	pole3 = new THREE.Mesh(
+		new THREE.CylinderGeometry(6, 6,350,10,15,false), woodMaterial);
+	pole3.position.x = 0;
+	pole3.position.y = 360;
+	pole3.position.z = 0;
+	pole3.rotation.y = -9.9;
+	pole3.rotation.z = Math.PI/2;
+	scene.add(pole3);
 	
 	burningLog1 = new THREE.Mesh(
 		new THREE.CylinderGeometry(25, 25, 250, 8, 15, false), burningWoodMaterial);
