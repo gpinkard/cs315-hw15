@@ -25,10 +25,6 @@ function fillScene() {
 
 	scene.add( light );
 
-//grid xz
- var gridXZ = new THREE.GridHelper(2000, 100, new THREE.Color(0xCCCCCC), new THREE.Color(0x888888));
- scene.add(gridXZ);
-
 // gui
 	
 	gui = new dat.GUI({
@@ -52,7 +48,7 @@ function fillScene() {
     smokeEmitter.position.spread.setY(value);
     smokeEmitter.position.spread = smokeEmitter.position.spread;
 	});
-	gui.add(params, 'smokeDensity').min(0).max(400).step(10).name('smokeDensity').listen().onChange(function (value){	
+	gui.add(params, 'smokeDensity').min(0).max(500).step(10).name('smokeDensity').listen().onChange(function (value){	
     smokeEmitter.size.value = value;
     smokeEmitter.size.value = smokeEmitter.size.value;
 	});
@@ -87,7 +83,7 @@ function drawFire() {
 	var burningTexture = loader.load( './img/burningWoodTexture.png', render );
 	burningTexture.wrapS = burningTexture.wrapT = THREE.RepeatWrapping;
 	burningTexture.matrixAutoUpdate = false; // set this to false to update texture.matrix manually
-	var burningWoodMaterial = new THREE.MeshBasicMaterial( { map : burningTexture} );	
+	var burningWoodMaterial = new THREE.MeshPhongMaterial( { map : burningTexture, side: THREE.DoubleSide} );	
 	
 	var woodTexture = loader.load('./img/woodTexture.png', render );
 	woodTexture.wrapS = woodTexture.wrapT = THREE.RepeatWrapping;
@@ -100,11 +96,22 @@ function drawFire() {
 	stoneTexture.matrixAutoUpdate = false; // set this to false to update texture.matrix manually
 	var stoneMaterial= new THREE.MeshPhongMaterial({map : stoneTexture});
 	//stoneMaterial.color.setRGB( 0.0, 0.1, 0.4 );	
+	
+	var firePitTexture = loader.load('./img/firePitTexture.png', render);
+	firePitTexture.wrapS = firePitTexture.wrapT = THREE.RepeatWrapping;
+	firePitTexture.matrixAutoAupdate = false;
+	var firePitMaterial = new THREE.MeshPhongMaterial({map : firePitTexture, side: THREE.DoubleSide});
+
+	var groundTexture = loader.load('./img/groundTexture.jpg', render);
+	groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
+	groundTexture.matrixAutoAupdate = false;
+	var groundMaterial = new THREE.MeshPhongMaterial({map : groundTexture, side: THREE.DoubleSide});
 
 	//objects
 	var log1, log2, log3, burningLog1, burningLog2, burningLog3, burningLog4, burningLogSmall1;
 	var stone1, stone2, stone3, stone4, stone5, stone6, stone7, stone8, stone9, stone10, stone11;	
 	var stone12, stone13, stone14, stone15, stone16, stone17, stone18;
+	var firePit, ground;
 
 	var manager = new THREE.LoadingManager();
 		manager.onProgress = function ( item, loaded, total ) {
@@ -395,14 +402,73 @@ function drawFire() {
 			scene.add( stone18 );
 	} );	
 
+	firePit = new THREE.Mesh(
+		new THREE.PlaneGeometry(220, 220, 10 ), burningWoodMaterial);
+	firePit.position.x = 4;
+	firePit.position.y = 8;
+	firePit.position.z = 0;
+	//firePit.rotation.z = Math.PI/2;
+	firePit.rotation.x = Math.PI/2;
+	scene.add(firePit);
+
+	ground = new THREE.Mesh(
+		new THREE.PlaneGeometry(1600,1600,10), groundMaterial);
+	ground.position.x = 0;
+	ground.position.y = 5;
+	ground.position.z = 0;
+	ground.rotation.x = Math.PI/2;
+	scene.add(ground);
+
 	log1 = new THREE.Mesh(
 		new THREE.CylinderGeometry(25, 25, 160, 8, 15, false), woodMaterial);
-	log1.position.x = 200;
+	log1.position.x = 230;
 	log1.position.y = 20;
-	log1.position.z = 200;
-	log1.rotation.x = Math.PI/2;
+	log1.position.z = 260;
 	log1.rotation.z = Math.PI/2;
+	log1.rotation.x = Math.PI/2;
 	scene.add(log1);
+
+
+	log2 = new THREE.Mesh(
+		new THREE.CylinderGeometry(25, 25, 160, 8, 15, false), woodMaterial);
+	log2.position.x = 200;
+	log2.position.y = 20;
+	log2.position.z = 208;
+	log2.rotation.z = Math.PI/2;
+	log2.rotation.x = Math.PI/2;
+	scene.add(log2);
+	
+	log3 = new THREE.Mesh(
+		new THREE.CylinderGeometry(25, 25, 160, 8, 15, false), woodMaterial);
+	log3.position.x = 210;
+	log3.position.y = 60;
+	log3.position.z = 230;
+	log3.rotation.z = Math.PI/2;
+	log3.rotation.x = Math.PI/2;
+	scene.add(log3);
+
+	//pole1 = new THREE.Mesh(
+	//	new THREE.CylinderGeometry(10,10,340,10,15,false), woodMaterial);
+	//pole1.position.x = 140;
+	//pole1.position.y = 170;
+	//pole1.position.z = 70;
+	//scene.add(pole1);
+
+	//pole2 = new THREE.Mesh(
+	//	new THREE.CylinderGeometry(10,10,340,10,15,false), woodMaterial);
+	//pole2.position.x = -140;
+	//pole2.position.y = 170;
+	//pole2.position.z = -70;
+	//scene.add(pole2);
+
+	//pole3 = new THREE.Mesh(
+	//	new THREE.CylinderGeometry(6, 6,250,10,15,false), woodMaterial);
+	//pole3.position.x = 200;
+	//pole3.position.y = 320;
+	//pole3.position.z = 100;
+	//pole3.rotation.x = Math.PI/2;
+	//pole3.rotation.z = Math.PI/2;
+	//scene.add(pole3);
 	
 	burningLog1 = new THREE.Mesh(
 		new THREE.CylinderGeometry(25, 25, 250, 8, 15, false), burningWoodMaterial);
